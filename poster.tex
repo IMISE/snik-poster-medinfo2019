@@ -1,19 +1,24 @@
 \PassOptionsToPackage{demo}{graphicx}
+\PassOptionsToPackage{table}{xcolor}
 \documentclass[portrait,final,a0paper,fontscale=0.277]{baposter}
 
-\usepackage{calc}
-\usepackage{amsmath}
-\usepackage{amssymb}
 \usepackage{relsize}
-\usepackage{multirow}
-\usepackage{rotating}
-\usepackage{bm}
-\usepackage{url}
-
+\usepackage[breaklinks=true]{hyperref}
 \usepackage{graphicx}
 \usepackage{multicol}
+\usepackage{siunitx}
+\usepackage{tabulary}
 
 \usepackage{listings}
+\lstset{
+ columns=fullflexible,
+%  frame=single,
+ breaklines=true,
+ breakatwhitespace=true,
+% basicstyle=\ttfamily
+%  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+\lstset{language=SQL,morekeywords={minus,ask,bb,meta,rdfs}}
 
 %\usepackage{times}
 %\usepackage{helvet}
@@ -21,12 +26,6 @@
 \usepackage{palatino}
 
 \newcommand{\captionfont}{\footnotesize}
-
-\usetikzlibrary{calc}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Some math symbols used in the text
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Multicol Settings
@@ -148,7 +147,8 @@
       \tikz{\useasboundingbox (-0.2em,-0.32em) rectangle(0.2em,0.32em); \draw[draw=black,fill=lightblue,line width=0.03em] (0,0) circle(0.18em);}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=problem,column=0,row=0]{Problem}
+\begin{posterbox}[name=background,column=0,row=0]{Background}
+\centering\includegraphics[width=\columnwidth]{img/metamodel.pdf}
 Management of hospital information systems (HIS) is an exceptionally challenging task.
 There is an enormous amount of frameworks, textbooks and articles describing the scope from the perspective of medical informatics.
 However, the disciplines of business informatics and information systems (IS) provide an even broader view on information systems and their management.
@@ -156,16 +156,13 @@ How can knowledge on HIS management be made easily and freely available and how 
 \vspace{0.3em}
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=contribution,column=0,below=problem]{Contributions}
-We present several interfaces of SNIK that are useful for researchers practitioners and students, depending on their objectives and their semantic web skills.
-We show that those interfaces can benefit teaching, system analysis and integration.
-\end{posterbox}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=results,column=1,span=2,row=0]{Results}
+\begin{posterbox}[name=results,below=background]{Results}
+%We present several interfaces of SNIK that are useful for researchers practitioners and students, depending on their objectives and their semantic web skills.
+%We show that those interfaces can benefit teaching, system analysis and integration.
 
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=references,column=0,above=bottom]{References}
+\begin{posterbox}[name=references,column=0,below=results]{References}
     \smaller
     \bibliographystyle{ieee}
     \renewcommand{\section}[2]{\vskip 0.05em}
@@ -183,7 +180,7 @@ We show that those interfaces can benefit teaching, system analysis and integrat
    \vspace{0.3em}
   \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=background model,column=1,below=results]{SNIK Graph}
+\begin{posterbox}[name=snikgraph,column=1,row=0]{SNIK Graph}
 \indent
 The most intuitive interface to SNIK is the SNIK Graph visualization, which is based on the Cytoscape.js browser graph library.
 SNIK Graph queries the list of classes and their relations from the SPARQL endpoint and transforms them into nodes and edges of the graph.
@@ -191,50 +188,57 @@ Exploration options like the “spider worm”, which consists of the shortest p
 \vspace{0.3em}
   \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=sparql,column=2,row=0,below=results,bottomaligned=background model]{SPARQL}
-\begin{lstlisting}                                                                                                                                                                                                 
-Test
-\end{lstlisting}
+\begin{posterbox}[name=sparql,column=1,span=2,above=bottom]{SPARQL}
+\noindent
+Public access to the meta model and the subontologies via SPARQL queries:
+
+\vspace{1em}
+{
+\rowcolors{0}{lightblue}{white}
+\centering
+\begin{tabular*}{\columnwidth}{l}
 Which components of a healthcare network are not healthcare institutions?\\
 \begin{lstlisting}
-select ?x {
-bb:HealthCareNetwork
-meta:entityTypeComponent ?x.
-MINUS {?x rdfs:subClassOf*
-bb:HealthCareInstitution. }
-}
-\end{lstlisting}
-
-bb:GovernmentalAuthority\\
+SELECT ?x {bb:HealthCareNetwork meta:entityTypeComponent ?x.
+  MINUS {?x rdfs:subClassOf* bb:HealthCareInstitution.}}
+\end{lstlisting}\\
+%bb:GovernmentalAuthority\\
 
 How many functions is the CIO responsible for?\\
-
 \begin{lstlisting}
-select count(?f) {
-bb:ChiefInformationOfficer
-meta:isResponsibleForFunction ?f.
-}
-\end{lstlisting}
-15\\
+SELECT COUNT(?f) {bb:ChiefInformationOfficer meta:isResponsibleForFunction ?f.}
+\end{lstlisting}\\
+%15\\
 
 Does a transinstitutional health information system support telemicroscopy?\\
 \begin{lstlisting}
-ask{
-bb:TransinstitutionalHealthInformationSystem
-meta:supports bb:Telemicroscopy. }
+ASK {bb:TransinstitutionalHealthInformationSystem meta:supports bb:Telemicroscopy.}
 \end{lstlisting}
-True
+\end{tabular*}
+%True
+}
 \vspace{0.0em}
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=source,column=2,below=sparql,above=bottom]{Source Code}
-\indent
-The source code for the services is available at \url{https://github.com/imise}
-\end{posterbox}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=questions,column=1,span=1,below=background model,above=bottom]{A Future Direction}
-
-\vspace{0.3em}
+\begin{posterbox}[name=source,column=1,span=2,above=sparql,below=background]{Details}
+\begin{tabulary}{\columnwidth}{lL}
+URL		&\url{http://www.snik.eu/ontology}\\
+Version		&2018-10-10, 0.4.1\\
+License		&CC BY-NC-SA 4.0\\
+SPARQL Endpoint	&\url{http://www.snik.eu/sparql}\\
+Subontologies	&\url{http://www.snik.eu/ontology/bb}\\
+		&\url{http://www.snik.eu/ontology/ciox,}\\
+		&\url{http://www.snik.eu/ontology/ob}\\
+		&\url{http://www.snik.eu/ontology/he}\\
+		&\url{http://www.snik.eu/ontology/it4it}\\
+Visualization	&\url{http://www.snik.eu/graph}\\
+RDF Browser	&\url{http://www.snik.eu/ontology}\\
+RDF Dump	&\url{https://github.com/IMISE/snik-ontology/releases/download/0.4.1/snik-0.4.1-combined.nt.zip}\\
+\# Triples	&\num{112747}\\
+\# Classes	&\num{4729}\\
+\# Properties	&\num{329}\\
+\# Interlinks	&\num{713}\\
+\end{tabulary}%The source code for the services is available at \url{https://github.com/imise}
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{poster}
