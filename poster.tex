@@ -1,6 +1,9 @@
-\PassOptionsToPackage{demo}{graphicx}
+%\PassOptionsToPackage{demo}{graphicx}
 \PassOptionsToPackage{table}{xcolor}
-\documentclass[portrait,final,a0paper,fontscale=0.277]{baposter}
+\documentclass[portrait,final,a0paper,fontscale=0.310]{baposter}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
 
 \usepackage{relsize}
 \usepackage[breaklinks=true]{hyperref}
@@ -8,6 +11,7 @@
 \usepackage{multicol}
 \usepackage{siunitx}
 \usepackage{tabulary}
+\usepackage{cleveref}
 
 \usepackage{listings}
 \lstset{
@@ -26,6 +30,7 @@
 \usepackage{palatino}
 
 \newcommand{\captionfont}{\footnotesize}
+\usepackage[font=small,labelfont=bf]{caption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Multicol Settings
@@ -55,60 +60,36 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Define some colors
 
-%\definecolor{lightblue}{cmyk}{0.83,0.24,0,0.12}
-\definecolor{lightblue}{rgb}{0.145,0.6666,1}
+% Corporate design colors of the medical faculty of the Uni of Leipzig, new design of 2018
+\definecolor{mediblue}{RGB}{0,138,201}
+\definecolor{mixblue}{RGB}{0,167,214}
+\definecolor{aquamarine}{RGB}{138,194,209}
+%\definecolor{lowertriangle}{RGB}{9,65,81}
 
-% Draw a video
-\newlength{\FSZ}
-\newcommand{\drawvideo}[3]{% [0 0.25 0.5 0.75 1 1.25 1.5]
-   \noindent\pgfmathsetlength{\FSZ}{\linewidth/#2}
-   \begin{tikzpicture}[outer sep=0pt,inner sep=0pt,x=\FSZ,y=\FSZ]
-   \draw[color=lightblue!50!black] (0,0) node[outer sep=0pt,inner sep=0pt,text width=\linewidth,minimum height=0] (video) {\noindent#3};
-   \path [fill=lightblue!50!black,line width=0pt] 
-     (video.north west) rectangle ([yshift=\FSZ] video.north east) 
-    \foreach \x in {1,2,...,#2} {
-      {[rounded corners=0.6] ($(video.north west)+(-0.7,0.8)+(\x,0)$) rectangle +(0.4,-0.6)}
-    }
-;
-   \path [fill=lightblue!50!black,line width=0pt] 
-     ([yshift=-1\FSZ] video.south west) rectangle (video.south east) 
-    \foreach \x in {1,2,...,#2} {
-      {[rounded corners=0.6] ($(video.south west)+(-0.7,-0.2)+(\x,0)$) rectangle +(0.4,-0.6)}
-    }
-;
-   \foreach \x in {1,...,#1} {
-     \draw[color=lightblue!50!black] ([xshift=\x\linewidth/#1] video.north west) -- ([xshift=\x\linewidth/#1] video.south west);
-   }
-   \foreach \x in {0,#1} {
-     \draw[color=lightblue!50!black] ([xshift=\x\linewidth/#1,yshift=1\FSZ] video.north west) -- ([xshift=\x\linewidth/#1,yshift=-1\FSZ] video.south west);
-   }
-   \end{tikzpicture}
-}
-
-\hyphenation{resolution occlusions}
 %%
 \begin{poster}%
   % Poster Options
   {
+  columns=2,
   % Show grid to help with alignment
-  grid=false,
+  grid=true,
   % Column spacing
   colspacing=1em,
   % Color style
   bgColorOne=white,
   bgColorTwo=white,
-  borderColor=lightblue,
-  headerColorOne=black,
-  headerColorTwo=lightblue,
+  borderColor=mediblue,
+  headerColorOne=mediblue,
+  headerColorTwo=mediblue,
   headerFontColor=white,
   boxColorOne=white,
-  boxColorTwo=lightblue,
+  boxColorTwo=mediblue,
   % Format of textbox
   textborder=roundedleft,
   % Format of text header
   eyecatcher=true,
   headerborder=closed,
-  headerheight=0.1\textheight,
+  headerheight=0.12\textheight,
 %  textfont=\sc, An example of changing the text font
   headershape=roundedright,
   headershade=shadelr,
@@ -120,15 +101,16 @@
   linewidth=2pt
   }
   % Eye Catcher
-  {\includegraphics[height=5em]{images/graph_occluded.pdf}} 
+  {\includegraphics[width=25em]{img/medfak.pdf}} 
   % Title
-  {\bf\textsc{Open and linkable Knowledge about Management of Health Information Systems}\vspace{0.5em}}
+  {\bf\textsc{Linked Open Data about Management of Health Information Systems}\vspace{0.5em}
+  }
   % Authors
   {\textsc{Konrad Höffner, Franziska Jahn, Anna Lörke, Thomas Pause, Birgit Schneider,Elske
   Ammenwerth, Alfred Winter}}
   % University logo
   {% The makebox allows the title to flow into the logo, this is a hack because of the L shaped logo.
-    \includegraphics[height=9.0em]{images/logo}
+    %\includegraphics[height=9.0em]{img/medfak.pdf}
   }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,16 +126,31 @@
     %
     % A coloured circle useful as a bullet with an adjustably strong filling
     \newcommand{\colouredcircle}{%
-      \tikz{\useasboundingbox (-0.2em,-0.32em) rectangle(0.2em,0.32em); \draw[draw=black,fill=lightblue,line width=0.03em] (0,0) circle(0.18em);}}
+      \tikz{\useasboundingbox (-0.2em,-0.32em) rectangle(0.2em,0.32em); \draw[draw=black,fill=imiseblue,line width=0.03em] (0,0) circle(0.18em);}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{posterbox}[name=background,column=0,row=0]{Background}
-\centering\includegraphics[width=\columnwidth]{img/metamodel.pdf}
-Management of hospital information systems (HIS) is an exceptionally challenging task.
-There is an enormous amount of frameworks, textbooks and articles describing the scope from the perspective of medical informatics.
-However, the disciplines of business informatics and information systems (IS) provide an even broader view on information systems and their management.
-How can knowledge on HIS management be made easily and freely available and how can this knowledge be combined with other knowledge in biomedical and health informatics and in other disciplines?
+
+\begin{minipage}{\linewidth}
+\centering
+\captionof{figure}{The SNIK Meta Model}
+\label{fig:metamodel}
+\includegraphics[width=\columnwidth]{img/metamodel.pdf}
+\end{minipage}
+The Semantic Network of Information Management in Hospitals (SNIK) is an OWL 2 DL ontology with a modular architecture:
+The Meta Model provides a common vocabulary for the domain of HIS management and thus defines, which superclasses and relations can be used, see \cref{fig:metamodel}.
+Five subontologies are built upon the meta model: bb,ob,he,ciox,it4it.
+%The SNIK project uses Ontologies and Linked Data technologies to  
+%Management of hospital information systems (HIS) is an exceptionally challenging task.
+%There is an enormous amount of frameworks, textbooks and articles describing the scope from the perspective of medical informatics.
+%However, the disciplines of business informatics and information systems (IS) provide an even broader view on information systems and their management.
+%How can knowledge on HIS management be made easily and freely available and how can this knowledge be combined with other knowledge in biomedical and health informatics and in other disciplines?
 \vspace{0.3em}
+\end{posterbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{posterbox}[name=results,below=background]{RDF Browser}
+%We present several interfaces of SNIK that are useful for researchers practitioners and students, depending on their objectives and their semantic web skills.
+%We show that those interfaces can benefit teaching, system analysis and integration.
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{posterbox}[name=results,below=background]{Results}
@@ -188,13 +185,13 @@ Exploration options like the “spider worm”, which consists of the shortest p
 \vspace{0.3em}
   \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=sparql,column=1,span=2,above=bottom]{SPARQL}
+\begin{posterbox}[name=sparql,column=1,above=bottom]{SPARQL}
 \noindent
 Public access to the meta model and the subontologies via SPARQL queries:
 
 \vspace{1em}
 {
-\rowcolors{0}{lightblue}{white}
+\rowcolors{0}{mediblue!20}{white}
 \centering
 \begin{tabular*}{\columnwidth}{l}
 Which components of a healthcare network are not healthcare institutions?\\
@@ -210,7 +207,7 @@ SELECT COUNT(?f) {bb:ChiefInformationOfficer meta:isResponsibleForFunction ?f.}
 \end{lstlisting}\\
 %15\\
 
-Does a transinstitutional health information system support telemicroscopy?\\
+Do transinstitutional health information systems support telemicroscopy?\\
 \begin{lstlisting}
 ASK {bb:TransinstitutionalHealthInformationSystem meta:supports bb:Telemicroscopy.}
 \end{lstlisting}
@@ -220,7 +217,7 @@ ASK {bb:TransinstitutionalHealthInformationSystem meta:supports bb:Telemicroscop
 \vspace{0.0em}
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=source,column=1,span=2,above=sparql,below=background]{Details}
+\begin{posterbox}[name=source,column=1,above=sparql,below=background]{Details}
 \begin{tabulary}{\columnwidth}{lL}
 URL		&\url{http://www.snik.eu/ontology}\\
 Version		&2018-10-10, 0.4.1\\
