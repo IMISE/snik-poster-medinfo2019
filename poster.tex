@@ -96,24 +96,25 @@
   headershape=roundedright,
   headershade=shadelr,
   headerfont=\Large\bf\textsc, %Sans Serif
-  textfont={\setlength{\parindent}{1.5em}},
+  textfont={\setlength{\parindent}{0em}},
   boxshade=plain,
 %  background=shade-tb,
   background=plain,
   linewidth=2pt
   }
   % Eye Catcher
-  {\includegraphics[width=25em]{img/medfak.pdf}} 
+  {\includegraphics[width=30em]{img/medfak.pdf}} 
   % Title
   {\bf\textsc{Linked Open Data about Management of Health Information Systems}\vspace{0.5em}
   }
   % Authors
-  {\textsc{Konrad Höffner, Franziska Jahn, Anna Lörke, Thomas Pause, Birgit Schneider,Elske
+  {\textsc{Konrad Höffner\footnote{konrad.hoeffner@imise.uni-leipzig.de}, Franziska Jahn, Anna Lörke, Thomas Pause, Birgit Schneider, Elske
   Ammenwerth, Alfred Winter}}
   % University logo
   {% The makebox allows the title to flow into the logo, this is a hack because of the L shaped logo.
     %\includegraphics[height=9.0em]{img/medfak.pdf}
   }
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Now define the boxes that make up the poster
@@ -133,53 +134,52 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{posterbox}[name=background,column=0,row=0]{Background}
 
-\begin{minipage}{\linewidth}
-\centering
-\captionof{figure}{The SNIK Meta Model}
-\label{fig:metamodel}
-\includegraphics[width=\columnwidth]{img/metamodel.pdf}
-\end{minipage}
+%\begin{minipage}{\linewidth}
+%\centering
+%\captionof{figure}{The SNIK Meta Model}
+%\label{fig:metamodel}
+\includegraphics[width=1.01\columnwidth]{img/metamodel9s.pdf}
+%\end{minipage}
 The Semantic Network of Information Management in Hospitals (SNIK) is an OWL 2 DL ontology with a modular architecture:
-The Meta Model provides a common vocabulary for the domain of HIS management and thus defines, which superclasses and relations can be used, see \cref{fig:metamodel}.
-Five subontologies are built upon the meta model: bb,ob,he,ciox,it4it.
-%The SNIK project uses Ontologies and Linked Data technologies to  
-%Management of hospital information systems (HIS) is an exceptionally challenging task.
-%There is an enormous amount of frameworks, textbooks and articles describing the scope from the perspective of medical informatics.
-%However, the disciplines of business informatics and information systems (IS) provide an even broader view on information systems and their management.
-%How can knowledge on HIS management be made easily and freely available and how can this knowledge be combined with other knowledge in biomedical and health informatics and in other disciplines?
+The meta model provides a common vocabulary for the domain of hospital information system management.
+% and thus defines, which superclasses and relations can be used., see \cref{fig:metamodel}.
+It defines three basic disjunctive classes and their relations: Role (who), Function (does what) and Entity Type (and which information is required). %, see \cref{fig:metamodel}.
 \vspace{0.3em}
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=results,below=background]{RDF Browser}
+\begin{posterbox}[name=methods,below=background]{Methods}
+Semantic Web technologies and Linked Open Data principles are used to create, store and publish SNIK~\cite{sniktec}.
+Subontologies are manually extracted from different sources and build upon the meta model by attaching their subclass hierarchies to the Function, Role and EntityType classes.
+{\centering\includegraphics[width=0.8\columnwidth]{img/hierarchy.png}}
+\begin{center}
+\begin{tabular*}{0.96\columnwidth}{ll}
+\toprule
+Subontology					&Source\\
+\midrule
+\url{http://www.snik.eu/ontology/bb}		&Textbook~\cite{bb}\\
+\url{http://www.snik.eu/ontology/ob}		&Textbook~\cite{ob}\\
+\url{http://www.snik.eu/ontology/he}		&Textbook~\cite{he}\\
+\url{http://www.snik.eu/ontology/ciox}		&Hospital CEO Interview\\
+\url{http://www.snik.eu/ontology/it4it}		&Standard~\cite{it4it}\\
+\bottomrule
+\end{tabular*}
+\end{center}
+
+%inked Data principles, each class of SNIK has a unique URL.
 %We present several interfaces of SNIK that are useful for researchers practitioners and students, depending on their objectives and their semantic web skills.
+%resource using the HTTP protocol to receive a description of
+%the class, respectively the concept being represented by the
+%class, using the standards RDF and SPARQL. Opening a
 %We show that those interfaces can benefit teaching, system analysis and integration.
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=results,below=background]{Results}
-%We present several interfaces of SNIK that are useful for researchers practitioners and students, depending on their objectives and their semantic web skills.
-%We show that those interfaces can benefit teaching, system analysis and integration.
+\begin{posterbox}[name=results,column=1]{Results}
+Users can open a SNIK class URL in a web browser to receive a human-readable description using LodLive~\cite{lodlive}:
+\includegraphics[width=\textwidth]{img/lodlive.png}
 
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=references,column=0,below=results]{References}
-    \smaller
-    \bibliographystyle{ieee}
-    \renewcommand{\section}[2]{\vskip 0.05em}
-      \begin{thebibliography}{1}\itemsep=-0.01em
-      \setlength{\baselineskip}{0.4em}
-      \bibitem{amberg11:graphtrack}
-        B.~Amberg, T. Vetter.
-        \newblock {GraphTrack}: {F}ast and {G}lobally {O}ptimal {T}racking in {V}ideos
-        \newblock In {\em CVPR '11}
-      \bibitem{awf:tracking}
-        A.~Buchanan and A.~Fitzgibbon.
-        \newblock {I}nteractive {F}eature {T}racking using {K-D} {T}rees and {D}ynamic {P}rogramming.
-        \newblock In {\em CVPR '06}
-      \end{thebibliography}
-   \vspace{0.3em}
-  \end{posterbox}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=snikgraph,column=1,row=0]{SNIK Graph}
+\begin{posterbox}[name=snikgraph,column=1,below=results]{SNIK Graph}
 \indent
 The most intuitive interface to SNIK is the SNIK Graph visualization, which is based on the Cytoscape.js browser graph library.
 SNIK Graph queries the list of classes and their relations from the SPARQL endpoint and transforms them into nodes and edges of the graph.
@@ -187,7 +187,7 @@ Exploration options like the “spider worm”, which consists of the shortest p
 \vspace{0.3em}
   \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=sparql,column=1,above=bottom]{SPARQL}
+\begin{posterbox}[name=sparql,column=1,below=background]{SPARQL}
 \noindent
 Public access to the meta model and the subontologies via SPARQL queries:
 
@@ -219,26 +219,52 @@ ASK {bb:TransinstitutionalHealthInformationSystem meta:supports bb:Telemicroscop
 \vspace{0.0em}
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=source,column=1,above=sparql,below=background]{Details}
+\begin{posterbox}[name=source,column=1,below=snikgraph]{Details}
 \begin{tabulary}{\columnwidth}{lL}
+\toprule
 URL		&\url{http://www.snik.eu/ontology}\\
 Version		&2018-10-10, 0.4.1\\
 License		&CC BY-NC-SA 4.0\\
 SPARQL Endpoint	&\url{http://www.snik.eu/sparql}\\
-Subontologies	&\url{http://www.snik.eu/ontology/bb}\\
-		&\url{http://www.snik.eu/ontology/ciox,}\\
-		&\url{http://www.snik.eu/ontology/ob}\\
-		&\url{http://www.snik.eu/ontology/he}\\
-		&\url{http://www.snik.eu/ontology/it4it}\\
+%Subontologies	&\url{http://www.snik.eu/ontology/bb}\\
+%		&\url{http://www.snik.eu/ontology/ciox,}\\
+%		&\url{http://www.snik.eu/ontology/ob}\\
+%		&\url{http://www.snik.eu/ontology/he}\\
+%		&\url{http://www.snik.eu/ontology/it4it}\\
 Visualization	&\url{http://www.snik.eu/graph}\\
 RDF Browser	&\url{http://www.snik.eu/ontology}\\
-RDF Dump	&\url{https://github.com/IMISE/snik-ontology/releases/download/0.4.1/snik-0.4.1-combined.nt.zip}\\
+Download	&\url{https://github.com/IMISE/snik-ontology/releases/download/0.8.0/snik-0.8.zip}\\
 \# Triples	&\num{112747}\\
 \# Classes	&\num{4729}\\
 \# Properties	&\num{329}\\
 \# Interlinks	&\num{713}\\
+\bottomrule
 \end{tabulary}%The source code for the services is available at \url{https://github.com/imise}
 \end{posterbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{posterbox}[name=references,column=1,below=sparql]{References}
+    %\smaller
+    \bibliographystyle{abbrv}
+    \begingroup
+    \renewcommand{\section}[2]{}%suppress heading
+    \bibliography{poster}
+    \endgroup
+    \vspace{0.3em}
+    %The SNIK project is supported by the DFG (German Research Foundation) under the grant numbers 1605/7-1 and 1387/8-1.
+    SNIK is supported under the DFG grant numbers 1605/7-1 and 1387/8-1.
+  \end{posterbox}
+%%%%%%%%%%%%%%% IMISE Logo
+ \node [anchor=south west, inner sep=1pt] at (current page.south west)
+ {\includegraphics[height=0.03\textheight]{img/imise-logo.pdf}
+ };
+%%%%%%%%%%%%%%% SNIK Logo 
+ \node [anchor=south, inner sep=1pt,xshift=-5.5em] at (current page.south) % for unknown reasons the xshift is necessary
+ {\includegraphics[height=0.03\textheight]{img/snik-logo.png}
+ };
+%%%%%%%%%%%%%%% DFG Logo
+ \node [anchor=south east, inner sep=1pt,xshift=-2.5em] at (current page.south east) % for unknown reasons the xshift is necessary
+ {\includegraphics[height=0.03\textheight]{img/dfg-logo.pdf}
+ };
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{poster}
 \end{document}
