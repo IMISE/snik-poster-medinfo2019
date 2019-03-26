@@ -1,1 +1,1 @@
-latexmk -pdf --enable-write18 poster.tex
+latexmk -pdf --enable-write18 poster.tex | grep -v /usr/share/texmf-dist/
