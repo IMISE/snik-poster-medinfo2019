@@ -24,7 +24,7 @@
 % basicstyle=\ttfamily
 %  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
 }
-\lstset{language=SQL,morekeywords={minus,ask,bb,meta,rdfs}}
+\lstset{language=SQL,morekeywords={minus,ask,bb,meta,rdfs,skos}}
 
 %\usepackage{times}
 %\usepackage{helvet}
@@ -141,32 +141,32 @@
 \includegraphics[width=1.01\columnwidth]{img/metamodel9s.pdf}
 %\end{minipage}
 The Semantic Network of Information Management in Hospitals (SNIK) is an OWL 2 DL ontology with a modular architecture:
-The meta model provides a common vocabulary for the domain of hospital information system management.
+The meta model provides a common vocabulary for the domain of hospital information system (HIS) management.
 % and thus defines, which superclasses and relations can be used., see \cref{fig:metamodel}.
-It defines three basic disjunctive classes and their relations: Role (who), Function (does what) and Entity Type (and which information is required). %, see \cref{fig:metamodel}.
+It defines three basic disjunctive classes: Role (who), Function (does what) and Entity Type (which information is read and written). %, see \cref{fig:metamodel}.
 \vspace{0.3em}
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{posterbox}[name=methods,below=background]{Methods}
-Semantic Web technologies and Linked Open Data principles are used to create, store and publish SNIK~\cite{sniktec}.
+Semantic Web technologies principles are used to create, store and publish SNIK as Linked Open Data~\cite{sniktec}.
 Subontologies are manually extracted from different sources and build upon the meta model by attaching their subclass hierarchies to the Function, Role and EntityType classes.
-{\centering\includegraphics[width=0.8\columnwidth]{img/hierarchy.png}}
+{\centering\includegraphics[width=0.8\columnwidth]{img/hierarchy.pdf}}
 \begin{center}
-\begin{tabular*}{0.96\columnwidth}{ll}
+\begin{tabular*}{0.96\columnwidth}{lll}
 \toprule
-Subontology					&Source\\
+\textbf{Ontology}				&\textbf{Prefix}&\textbf{Source}\\
 \midrule
-\url{http://www.snik.eu/ontology/bb}		&Textbook~\cite{bb}\\
-\url{http://www.snik.eu/ontology/ob}		&Textbook~\cite{ob}\\
-\url{http://www.snik.eu/ontology/he}		&Textbook~\cite{he}\\
-\url{http://www.snik.eu/ontology/ciox}		&Hospital CEO Interview\\
-\url{http://www.snik.eu/ontology/it4it}		&Standard~\cite{it4it}\\
+\url{http://www.snik.eu/ontology/meta}		&meta		&All Sources\\
+\url{http://www.snik.eu/ontology/bb}		&bb		&Textbook~\cite{bb}\\
+\url{http://www.snik.eu/ontology/ob}		&ob		&Textbook~\cite{ob}\\
+\url{http://www.snik.eu/ontology/he}		&he		&Textbook~\cite{he}\\
+\url{http://www.snik.eu/ontology/ciox}		&ciox		&CIO Interview\\
+\url{http://www.snik.eu/ontology/it4it}		&it4it		&Standard~\cite{it4it}\\
 \bottomrule
 \end{tabular*}
 \end{center}
 
 %inked Data principles, each class of SNIK has a unique URL.
-%We present several interfaces of SNIK that are useful for researchers practitioners and students, depending on their objectives and their semantic web skills.
 %resource using the HTTP protocol to receive a description of
 %the class, respectively the concept being represented by the
 %class, using the standards RDF and SPARQL. Opening a
@@ -174,76 +174,86 @@ Subontology					&Source\\
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{posterbox}[name=results,column=1]{Results}
-Users can open a SNIK class URL in a web browser to receive a human-readable description using LodLive~\cite{lodlive}:
+SNIK v0.8 contains \num{4729} classes, \num{329} properties, \num{713} interlinks and \num{112747} triples and is available under the CC BY-NC-SA 4.0 as:
+\begin{tabulary}{\columnwidth}{lL}
+\toprule
+%URL		&\url{http://www.snik.eu/ontology}\\
+RDF dump	&\url{https://github.com/IMISE/snik-ontology/releases/download/0.8.0/snik-0.8.zip}\\
+LodLive Browser	&\url{http://www.snik.eu/ontology}\\
+SNIK Graph	&\url{http://www.snik.eu/graph}\\
+SPARQL Endpoint	&\url{http://www.snik.eu/sparql}\\
+%RDF Dump	&\url{https://github.com/IMISE/snik-ontology/releases/download/0.8.0/snik-0.8.zip}\\
+\bottomrule
+\end{tabulary}%The source code for the services is available at \url{https://github.com/imise}
+
+%The \emph{RDF dump} is available at \url{https://github.com/IMISE/snik-ontology/releases/download/0.8.0/snik-0.8.zip} and contains all triples of SNIK in Turtle syntax, such as:
+The \emph{RDF dump} contains all triples of SNIK in Turtle syntax, such as:
+\begin{lstlisting}[basicstyle=\ttfamily]
+bb:InformationSystem
+        rdfs:label "Information System"@en;
+        rdfs:subClassOf bb:InformationManagementEntityType;
+        skos:closeMatch ob:InformationSystem;
+        meta:supports bb:Documentation.
+\end{lstlisting}
+%offers several interfaces that are useful for researchers practitioners and students, depending on their objectives and their semantic web skills.
+Users can open a SNIK class URL in a web browser using \emph{LodLive}~\cite{lodlive}:
 \includegraphics[width=\textwidth]{img/lodlive.png}
-
-\end{posterbox}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=snikgraph,column=1,below=results]{SNIK Graph}
-\indent
-The most intuitive interface to SNIK is the SNIK Graph visualization, which is based on the Cytoscape.js browser graph library.
-SNIK Graph queries the list of classes and their relations from the SPARQL endpoint and transforms them into nodes and edges of the graph.
-Exploration options like the “spider worm”, which consists of the shortest path between a start node and an end node together with the end node’s neighbourhood, illustrate the context of a concept.
-\vspace{0.3em}
-  \end{posterbox}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=sparql,column=1,below=background]{SPARQL}
-\noindent
-Public access to the meta model and the subontologies via SPARQL queries:
-
-\vspace{1em}
-{
-\rowcolors{0}{mediblue!20}{white}
-\centering
-\begin{tabular*}{\columnwidth}{l}
-Which components of a healthcare network are not healthcare institutions?\\
+\emph{SNIK Graph} visualizes the structure of SNIK by modelling each class as a node and each RDF triple and OWL restriction as an edge:
+\includegraphics[width=\textwidth]{img/graph.png}
+%SNIK Graph queries the list of classes and their relations from the SPARQL endpoint and transforms them into nodes and edges of the graph.
+%Exploration options like the “spider worm”, which consists of the shortest path between a start node and an end node together with the end node’s neighbourhood, illustrate the context of a concept.
+%The meta model and the subontologies can be freely accessed via SPARQL queries:
+The SPARQL endpoint is the most expressive interface to SNIK but requires knowledge of both the SPARQL syntax and the SNIK meta model.
+%Read access is publicly available at \url{http://www.snik.eu/sparql} 
+It can be used both as an API and directly.
+Example queries:\\
+Which components of a healthcare network are not healthcare institutions?
 \begin{lstlisting}
 SELECT ?x {bb:HealthCareNetwork meta:entityTypeComponent ?x.
   MINUS {?x rdfs:subClassOf* bb:HealthCareInstitution.}}
-\end{lstlisting}\\
-%bb:GovernmentalAuthority\\
-
-How many functions is the CIO responsible for?\\
+\end{lstlisting}
+How many functions is the CIO responsible for?
 \begin{lstlisting}
 SELECT COUNT(?f) {bb:ChiefInformationOfficer meta:isResponsibleForFunction ?f.}
-\end{lstlisting}\\
-%15\\
+\end{lstlisting}
 
-Do transinstitutional health information systems support telemicroscopy?\\
+Do transinstitutional health information systems support telemicroscopy?
 \begin{lstlisting}
 ASK {bb:TransinstitutionalHealthInformationSystem meta:supports bb:Telemicroscopy.}
 \end{lstlisting}
-\end{tabular*}
-%True
-}
 \vspace{0.0em}
+
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=source,column=1,below=snikgraph]{Details}
+\begin{posterbox}[name=discussion,column=1,below=results]{Discussion}
+SNIK is published using open standards over interfaces with different compromises between expressivity and accessibility for different audiences.
+Future work includes a dedicated ontology modelling tool.
+%Different user groups can use the interfaces of SNIK that are most suitable to them:
+%For example, the IT management of a hospital can use SNIK as a vocabulary to integrate data from different formats that result from application components from different vendors.
+%Using the SPARQL query language, experts can also integrate applications with the SNIK ontology.
+%Experts can also use the SPARQL query editor to answer specific questions.
+%Students and teachers benefit more from SNIK Graph and the RDF browser, which intuitively presents knowledge without the need for technical skills.
+\begin{center}
+\begin{tabulary}{\textwidth}{lll}
+\toprule
+\textbf{Goal}		&\textbf{Audience}		&\textbf{Interfaces}\\
+\midrule
+Teaching	&Teachers and Students		&SNIK Graph, LodLive\\
+Integration	&Hospital Management		&SPARQL Endpoint, RDF Dump\\
+Modelling	&Experts, Ontologists		&SPARQL Endpoint, RDF Dump\\
+\bottomrule
+\end{tabulary}
+\end{center}
+
 \begin{tabulary}{\columnwidth}{lL}
 \toprule
-URL		&\url{http://www.snik.eu/ontology}\\
-Version		&2018-10-10, 0.4.1\\
-License		&CC BY-NC-SA 4.0\\
-SPARQL Endpoint	&\url{http://www.snik.eu/sparql}\\
-%Subontologies	&\url{http://www.snik.eu/ontology/bb}\\
-%		&\url{http://www.snik.eu/ontology/ciox,}\\
-%		&\url{http://www.snik.eu/ontology/ob}\\
-%		&\url{http://www.snik.eu/ontology/he}\\
-%		&\url{http://www.snik.eu/ontology/it4it}\\
-Visualization	&\url{http://www.snik.eu/graph}\\
-RDF Browser	&\url{http://www.snik.eu/ontology}\\
-Download	&\url{https://github.com/IMISE/snik-ontology/releases/download/0.8.0/snik-0.8.zip}\\
-\# Triples	&\num{112747}\\
-\# Classes	&\num{4729}\\
-\# Properties	&\num{329}\\
-\# Interlinks	&\num{713}\\
 \bottomrule
 \end{tabulary}%The source code for the services is available at \url{https://github.com/imise}
+
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{posterbox}[name=references,column=1,below=sparql]{References}
-    %\smaller
+\begin{posterbox}[name=references,column=0,below=methods]{References}
+    \smaller
     \bibliographystyle{abbrv}
     \begingroup
     \renewcommand{\section}[2]{}%suppress heading
@@ -254,11 +264,11 @@ Download	&\url{https://github.com/IMISE/snik-ontology/releases/download/0.8.0/sn
     SNIK is supported under the DFG grant numbers 1605/7-1 and 1387/8-1.
   \end{posterbox}
 %%%%%%%%%%%%%%% IMISE Logo
- \node [anchor=south west, inner sep=1pt] at (current page.south west)
+ \node [anchor=south east, inner sep=1pt,xshift=-19em] at (current page.south east)
  {\includegraphics[height=0.03\textheight]{img/imise-logo.pdf}
  };
 %%%%%%%%%%%%%%% SNIK Logo 
- \node [anchor=south, inner sep=1pt,xshift=-5.5em] at (current page.south) % for unknown reasons the xshift is necessary
+ \node [anchor=south east, inner sep=1pt,xshift=-35em] at (current page.south east) % for unknown reasons the xshift is necessary
  {\includegraphics[height=0.03\textheight]{img/snik-logo.png}
  };
 %%%%%%%%%%%%%%% DFG Logo
