@@ -64,45 +64,11 @@
 % Define some colors
 
 % Corporate design colors of the medical faculty of the Uni of Leipzig, new design of 2018
-\definecolor{mediblue}{RGB}{0,138,201}
-\definecolor{mixblue}{RGB}{0,167,214}
-\definecolor{aquamarine}{RGB}{138,194,209}
 %\definecolor{lowertriangle}{RGB}{9,65,81}
 
 %%
-\begin{poster}%
-  % Poster Options
-  {
-  columns=2,
-  % Show grid to help with alignment
-  grid=true,
-  % Column spacing
-  colspacing=1em,
-  % Color style
-  bgColorOne=white,
-  bgColorTwo=white,
-  borderColor=mediblue,
-  headerColorOne=mediblue,
-  headerColorTwo=mediblue,
-  headerFontColor=white,
-  boxColorOne=white,
-  boxColorTwo=mediblue,
-  % Format of textbox
-  textborder=roundedleft,
-  % Format of text header
-  eyecatcher=true,
-  headerborder=closed,
-  headerheight=0.12\textheight,
-%  textfont=\sc, An example of changing the text font
-  headershape=roundedright,
-  headershade=shadelr,
-  headerfont=\Large\bf\textsc, %Sans Serif
-  textfont={\setlength{\parindent}{0em}},
-  boxshade=plain,
-%  background=shade-tb,
-  background=plain,
-  linewidth=2pt
-  }
+\begin{poster}% Set grid to false for final print
+  {grid=true,}
   % Eye Catcher
   {\includegraphics[width=30em]{img/medfak.pdf}} 
   % Title
@@ -286,7 +252,7 @@ Modelling	&Experts, Ontologists		&SPARQL Endpoint, RDF Dump\\
     SNIK is supported under the DFG grant numbers 1605/7-1 and 1387/8-1.
   \end{posterbox}
 %%%%%%%%%%%%%%% IMISE Logo
- \node [anchor=south east, inner sep=1pt,xshift=-19em] at (current page.south east)
+ \node [anchor=north east, inner sep=1pt,yshift=-2em,xshift=-1em] at (current page.north east)
  {\includegraphics[height=0.03\textheight]{img/imise-logo.pdf}
  };
 %%%%%%%%%%%%%%% SNIK Logo 

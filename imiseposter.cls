@@ -7,10 +7,10 @@
 %%
 %% It is meant to be used with pdftex, but might also work with pslatex if you
 %% are not interested in things like transparency.
-%%
+%% Original Template:
 %% Copyright (C) 2007-2011 Brian Amberg
 %% Copyright (C) 2011      Reinhold Kainhofer <reinhold@kainhofer.com>
-%%
+%% Licence: GPL%%
 %% 24. October 2011: 
 %%     - The grid was broken when not explicitly specifying the column number, this has been fixed now.
 %%     - The perennial text border faded was still broken, it just faded to the other text border color, not to transparent. Now also fixed
@@ -23,99 +23,14 @@
 %%       and produced spurious colored boxes with okular and acroread.
 %%     - Added one more example due to popular request
 %% 16. September 2011:
-%%     - Removed nag package, such that it compiles on older systems
-%%     - Added more examples
-%% 15. September 2011:
-%%     - Merged fork by (rk) back into mainline, essentially taking over all the great improvements that Reinhold Kainhofer coded.
-%%       We call this version 2, as it breaks the interface in some small points. Essentially watch out for this:
-%%       - no/yes keys are now false/true
-%%       - the shade-lr etc. keys have the hypen removed, and are now called shadelr etc.
-%      - Added more examples, which are all adapted to work with the current version
-%% 27. August 2011 (rk):
-%%     - Completely factored out all drawing commands to handler functions, assigned via choice keys
-%%     - Added cornerradius, boxheaderheight, boxpadding options
-%%     - Added missing roundedright
-%% 26. August 2011 (rk):
-%%     - Turned headerbox cmd into posterbox environment (allows verbatim)
-%%     - pass several options to packages
-%%     - added debug cls option to reduce default output
-%%     - rewrote several loops and ifthenelse
-%%     - Use boolean and choice keys for all options
-%%     - Changed all choice options to set a global function to
-%%       \imiseposter@OPTION@OPTIONVALUE, which are a functions that execute the
-%%       option's setting (drawing routine, color setting for tikz, etc.)
-%%     - Add a5paper
-%% 07. April 2011: Fixed paper size handling
-%%     - Fixed Paper Size handling, you can now specify all page sizes using paperwidth=, paperheight= class options.
-%%     - Added rudimentary documentation of the available keys.
-%% 11. December 2010: Fixed "Empty Second Page" bug
-%%     - A second empty page was introduced when a document ended with
-%%           \end{poster}
-%%         \end{document}
-%%       This was fixed thanks to a suggestion by Martin Aulbach
-%%     - Added
-%%         \thispagestyle{empty}
-%%       to suppress page numbers, which became visible when the margins are large.
-%%       The underlying problem of page-size handling has not yet been solved.
-%% 30. September 2010: Border Bugfixes
-%%     - Correct background color with textborder=rounded-small, Thanks to Ke Chen for the bugreport and patch
-%%     - Correctly draw rectangular text boxes, Thanks to abenkst for the bugreport and fix
-%% 10. June 2010: Added option to set the number of columns
-%%     - added a class option to set the number of columns
-%%         - columns=5: sets the number of columns to 5, possible values are 1..6, default is 3 in portrait and 4 in landscape format
-%% 29. April 2009: Incorporated Patches by Arne Henningsen
-%%     - added some class options
-%%        - a4shrink: shrink the paper to A4 size (for printing drafts or handouts)
-%%        - movebody=Xpt: move the text/poster body Xpt to the right
-%%                    (or to the left if Xpt is negative),
-%%                    e.g. for manually centering the poster on the page
-%%        - showframe: use the "showframe" option of the "geometry" package
-%%        - a0paper (default): set paper size to A0
-%%        - archE: set paper size to Arch E
-%%     - setting "background" can be "none" now (otherwise the "showframe"
-%%          option has no effect)
-%%     - the page number has been removed (it was mostly not visible before)
-%%     - the "margin=" option works now
-%% 04. December 2008
-%%     - Mainly an update to the landscape example
-%% 14. November 2008
-%%     - Actually center the title when eyecatcher is used.
-%% 04. November 2008
-%%     - Fixed bug with eyecatcher not working.
-%% 26. June 2008
-%%     - Fixed bug with plain background mode.
-%% 14. June 2008
-%%     - Support for portrait/landscape switching.
-%%     - Some smaller bugfixes.
-%% 01. June 2007
-%%     - First version released.
-%%
-%% Use this class with pdflatex
-%%
-%% I have confirmed that this package works with
-%%   - texlive 2007 and
-%%   - miktex 2.7
-%%
-%% It does not seem to work with
-%%   - miktex 2.2
-%%   - some old versions of tetex
-%%
-%%
-%% TODO:
-%% -) Rename backgrounds back to shaded-tb shade-lr
-%% -) Rename textborder back to rounded-small (consistent naming needed!)
-%% -) Rename headershade back to shade-lr, shade-tb, shade-tb-inverse
-%% -) Rename headershape back to small-rounded
-%% -) Option value consistency (small-rounded vs. rounded-small; missing ones)
-%% -) Rename \imiseposterHeaderSetShade, \imiseposterHeaderDrawText to include @ and verb
-%%
-%%
-%% Licence: GPL
+
+
 \ProvidesClass{imiseposter}[2011/11/26 v2.0 imiseposter class]
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
 \LoadClass{article}
 \typeout{imiseposter: Brian Amberg, 2007, 2008, 2009, 2010, 2011 | http://www.brian-amberg.de/uni/poster/}
 \typeout{imiseposter: Reinhold Kainhofer, 2011 | http://reinhold.kainhofer.com/}
+
 
 %% Define lengths only once on inclusion, such that we can make multiple posters
 \newlength{\imiseposter@basepaperwidth}
@@ -162,6 +77,7 @@
 \usetikzlibrary{fadings}
 \usetikzlibrary{snakes}
 \usetikzlibrary{calc}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Settings
@@ -468,20 +384,28 @@
 \define@cmdkey[ba]{posterbox}[imiseposter@box@]{height} [auto]  {}
 \define@cmdkey[ba]{posterbox}[imiseposter@box@]{name}   [noname]{}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% IMISE Additions
+\definecolor{mediblue}{RGB}{0,138,201}
+\definecolor{mixblue}{RGB}{0,167,214}
+\definecolor{aquamarine}{RGB}{138,194,209}
+%% IMISE Modifications 
 % Set some default values, the poster and posterbox environments can override:
 \setkeys[ba]{poster}{
   % Debug grid
   grid=false,
   % Is there an eyecatcher image
   eyecatcher=true,
-  columns={},
-  % Colours
-  bgColorOne=imiseposter@silver,
-  bgColorTwo=green,
-  %
+  columns=2,
   colspacing=1em,
-  headerheight=0.1\textheight,
-  background=shadelr,
+  % Colours
+  bgColorOne=white,
+  bgColorTwo=white,
+  %
+  headerheight=0.12\textheight,
+  background=plain,
+%  background=shade-tb,
+%  background=shadelr,
 }{}
 \setkeys[ba]{posterbox}{
   % Position
@@ -494,26 +418,33 @@
   name=noname,
   % Box design: border:
   linewidth=2pt,
-  borderColor=yellow,
+  borderColor=mediblue,
   cornerradius=1em,
   % text box:
   textfont={},
   boxshade=plain,
-  boxColorOne=magenta,
-  boxColorTwo=cyan,
-  textborder=faded,
+  boxColorOne=white,
+  boxColorTwo=mediblue,
+  textborder=roundedleft,
   boxpadding=0.5em,
   % header
   headerfont=\scshape\Large,% or headerfont=\color{white}\textsf\textbf
-  headerFontColor=black,
-  headerColorOne=red,
-  headerColorTwo=brown,
+  headerFontColor=white,
+  headerColorOne=mediblue,
+  headerColorTwo=mediblue,
   headershape=rectangle,
   headershade=shadeLR,
-  headerborder=none,
+  headerborder=closed,
   boxheaderheight=2em,
-  boxopacity=1.0
+  boxopacity=1.0,
+  linewidth=2pt,
+  headershape=roundedright,
+  headershade=shadelr,                                                                                   
+  headerfont=\Large\bf\textsc, %Sans Serif
+  textfont={\setlength{\parindent}{0em}},
+  boxshade=plain,
 }{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
