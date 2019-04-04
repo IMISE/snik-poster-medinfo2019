@@ -387,6 +387,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% IMISE Additions
 \definecolor{mediblue}{RGB}{0,138,201}
+\definecolor{medigray}{RGB}{157,157,157}
+\definecolor{medidarkgray}{RGB}{71,80,84}
 \definecolor{mixblue}{RGB}{0,167,214}
 \definecolor{aquamarine}{RGB}{138,194,209}
 %% IMISE Modifications 
@@ -1021,8 +1023,8 @@
       \draw (image.east) node(title)[anchor=west,text width=\imiseposter@titleimage@textwidth]{%
         \begin{minipage}{\imiseposter@titleimage@textwidth}%
           \begin{center}%
-          \textbf{\Huge #3}\\%
-          {\Large #4}%
+          \textbf{\textcolor{mediblue}{\Huge#3}}\\%
+          {\Large \textcolor{medigray}{#4}}%
           \end{center}%
         \end{minipage}
       };%
