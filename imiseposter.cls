@@ -28,8 +28,8 @@
 \ProvidesClass{imiseposter}[2011/11/26 v2.0 imiseposter class]
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
 \LoadClass{article}
-\typeout{imiseposter: Brian Amberg, 2007, 2008, 2009, 2010, 2011 | http://www.brian-amberg.de/uni/poster/}
-\typeout{imiseposter: Reinhold Kainhofer, 2011 | http://reinhold.kainhofer.com/}
+\typeout{baposter: Brian Amberg, 2007, 2008, 2009, 2010, 2011 | http://www.brian-amberg.de/uni/poster/}
+\typeout{baposter: Reinhold Kainhofer, 2011 | http://reinhold.kainhofer.com/}
 
 
 %% Define lengths only once on inclusion, such that we can make multiple posters
@@ -403,9 +403,7 @@
   bgColorTwo=white,
   %
   headerheight=0.12\textheight,
-  background=plain,
-%  background=shade-tb,
-%  background=shadelr,
+  background=none,
 }{}
 \setkeys[ba]{posterbox}{
   % Position
@@ -422,13 +420,13 @@
   cornerradius=1em,
   % text box:
   textfont={},
-  boxshade=plain,
+  boxshade=none,
   boxColorOne=white,
   boxColorTwo=mediblue,
   textborder=roundedleft,
   boxpadding=0.5em,
   % header
-  headerfont=\scshape\Large,% or headerfont=\color{white}\textsf\textbf
+  %headerfont=\scshape\Large,% or headerfont=\color{white}\textsf\textbf
   headerFontColor=white,
   headerColorOne=mediblue,
   headerColorTwo=mediblue,
@@ -440,10 +438,24 @@
   linewidth=2pt,
   headershape=roundedright,
   headershade=shadelr,                                                                                   
-  headerfont=\Large\bf\textsc, %Sans Serif
+  headerfont=\Large\bf\textsf, %Sans Serif
   textfont={\setlength{\parindent}{0em}},
   boxshade=plain,
 }{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Multicol Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\columnsep}{1.5em}
+\setlength{\columnseprule}{0mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Save space in lists. Use this after the opening of the list
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\compresslist}{%
+\setlength{\itemsep}{1pt}%
+\setlength{\parskip}{0pt}%
+\setlength{\parsep}{0pt}%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
