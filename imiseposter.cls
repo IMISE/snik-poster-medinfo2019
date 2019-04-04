@@ -27,7 +27,7 @@
 
 \ProvidesClass{imiseposter}[2011/11/26 v2.0 imiseposter class]
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
-\LoadClass{article}
+\LoadClass[8pt]{extarticle}
 \typeout{baposter: Brian Amberg, 2007, 2008, 2009, 2010, 2011 | http://www.brian-amberg.de/uni/poster/}
 \typeout{baposter: Reinhold Kainhofer, 2011 | http://reinhold.kainhofer.com/}
 
