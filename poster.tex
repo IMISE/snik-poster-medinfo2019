@@ -55,15 +55,15 @@
 
 %%
 \begin{poster}% Set grid to false for final print
-  {grid=true,}
+  {grid=false,}
   % Eye Catcher
-  {\includegraphics[width=30em]{img/medfak.pdf}} 
+  {\includegraphics[height=4.5cm]{img/medfak.pdf}} 
   % Title
-  {\bf\textsc{Linked Open Data about Management of Health Information Systems}\vspace{0.5em}
-  }
+%  {Linked Open Data about Management of Health Information Systems}
+  {Open and linkable Knowledge about Management of Health Information Systems}
   % Authors
-  {\textsc{Konrad Höffner\footnote{konrad.hoeffner@imise.uni-leipzig.de}, Franziska Jahn, Anna Lörke, Thomas Pause, Birgit Schneider, Elske
-  Ammenwerth, Alfred Winter}}
+  {Konrad Höffner {\small <khoeffner@imise.uni-leipzig.de>}, Franziska Jahn, Anna Lörke, Thomas Pause, Birgit Schneider, Elske
+  Ammenwerth, Alfred Winter}
   % University logo
   {% The makebox allows the title to flow into the logo, this is a hack because of the L shaped logo.
     %\includegraphics[height=9.0em]{img/medfak.pdf}
@@ -239,7 +239,7 @@ Modelling	&Experts, Ontologists		&SPARQL Endpoint, RDF Dump\\
     SNIK is supported under the DFG grant numbers 1605/7-1 and 1387/8-1.
   \end{posterbox}
 %%%%%%%%%%%%%%% IMISE Logo
- \node [anchor=north east, inner sep=1pt,yshift=-2em,xshift=-1em] at (current page.north east)
+ \node [anchor=south east, inner sep=1pt,xshift=-19em] at (current page.south east)
  {\includegraphics[height=0.03\textheight]{img/imise-logo.pdf}
  };
 %%%%%%%%%%%%%%% SNIK Logo 

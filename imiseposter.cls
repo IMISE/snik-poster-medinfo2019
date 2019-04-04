@@ -27,7 +27,7 @@
 
 \ProvidesClass{imiseposter}[2011/11/26 v2.0 imiseposter class]
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
-\LoadClass[8pt]{extarticle}
+\LoadClass[10pt]{extarticle}
 \typeout{baposter: Brian Amberg, 2007, 2008, 2009, 2010, 2011 | http://www.brian-amberg.de/uni/poster/}
 \typeout{baposter: Reinhold Kainhofer, 2011 | http://reinhold.kainhofer.com/}
 
@@ -417,14 +417,13 @@
   % Name
   name=noname,
   % Box design: border:
-  linewidth=2pt,
-  borderColor=mediblue,
+  borderColor=white,
   cornerradius=1em,
   % text box:
   textfont={},
   boxshade=none,
   boxColorOne=white,
-  boxColorTwo=mediblue,
+  boxColorTwo=black,
   textborder=roundedleft,
   boxpadding=0.5em,
   % header
@@ -433,12 +432,10 @@
   headerColorOne=mediblue,
   headerColorTwo=mediblue,
   headershape=rectangle,
-  headershade=shadeLR,
-  headerborder=closed,
+  headerborder=none,
   boxheaderheight=2em,
   boxopacity=1.0,
-  linewidth=2pt,
-  headershape=roundedright,
+  linewidth=0,
   headershade=shadelr,                                                                                   
   headerfont=\Large\bf\textsf, %Sans Serif
   textfont={\setlength{\parindent}{0em}},
