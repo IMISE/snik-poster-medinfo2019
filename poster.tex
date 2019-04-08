@@ -144,7 +144,15 @@ SPARQL Endpoint	&\url{http://www.snik.eu/sparql}\\
 %The \emph{RDF dump} is available at \url{https://github.com/IMISE/snik-ontology/releases/download/0.8.0/snik-0.8.zip} and contains all triples of SNIK in Turtle syntax, such as:
 
 %\begin{tcolorbox}[colback=white,colframe=mediblue,title=RDF Dump\\\url{https://github.com/IMISE/snik-ontology/releases/download/0.8.0/snik-0.8.zip}]
-\begin{tcolorbox}[colback=white,colframe=mediblue,title=RDF Dump~~\url{http://www.snik.eu/download/snik-0.8.zip}]
+\newtcolorbox{subsectionbox}[1]
+{
+  colframe=white,
+  colback=white,
+  colbacktitle=mediblue,
+  sharp corners=all,
+  title    = {#1},
+}
+\begin{subsectionbox}{RDF Dump~~\url{http://www.snik.eu/download/snik-0.8.zip}}
 The \emph{RDF dump} contains all triples of SNIK in Turtle syntax, such as:
 \begin{lstlisting}[basicstyle=\ttfamily]
 bb:InformationSystem
@@ -155,27 +163,27 @@ bb:InformationSystem
 \end{lstlisting}
 %offers several interfaces that are useful for researchers practitioners and students, depending on their objectives and their semantic web skills.
 \vspace{-1.0em}
-\end{tcolorbox}
+\end{subsectionbox}
 \vspace{-0.5em}
 
-\begin{tcolorbox}[colback=white,colframe=mediblue,title=LodLive RDF Browser~~~~~~~~~~~~~\url{http://www.snik.eu/ontology}]
+\begin{subsectionbox}{LodLive RDF Browser~~~~~~~~~~~~~\url{http://www.snik.eu/ontology}}
 %Users can open a SNIK class URL in a web browser using \emph{LodLive}~\cite{lodlive}:
 \includegraphics[width=\textwidth]{img/lodlive.png}
 \vspace{-1.0em}
-\end{tcolorbox}
+\end{subsectionbox}
 \vspace{-0.5em}
 
-\begin{tcolorbox}[colback=white,colframe=mediblue,title=SNIK Graph~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\url{http://www.snik.eu/graph}]
+\begin{subsectionbox}{SNIK Graph~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\url{http://www.snik.eu/graph}}
 \emph{SNIK Graph} visualizes the structure of SNIK by modelling each class as a node and each RDF triple and OWL restriction as an edge:
 \includegraphics[width=\textwidth]{img/snikgraph.png}
 %SNIK Graph queries the list of classes and their relations from the SPARQL endpoint and transforms them into nodes and edges of the graph.
 %Exploration options like the “spider worm”, which consists of the shortest path between a start node and an end node together with the end node’s neighbourhood, illustrate the context of a concept.
 %The meta model and the subontologies can be freely accessed via SPARQL queries:
 \vspace{-1.0em}
-\end{tcolorbox}
+\end{subsectionbox}
 \vspace{-0.5em}
 
-\begin{tcolorbox}[colback=white,colframe=mediblue,title=SPARQL Endpoint~~~~~~~~~~~~~~~~\url{http://www.snik.eu/sparql}]
+\begin{subsectionbox}{SPARQL Endpoint~~~~~~~~~~~~~~~~\url{http://www.snik.eu/sparql}}
 The SPARQL endpoint is the most expressive interface to SNIK but requires knowledge of both the SPARQL syntax and the SNIK meta model.
 %Read access is publicly available at \url{http://www.snik.eu/sparql} 
 It can be used both as an API and directly. Examples:\\
@@ -195,7 +203,7 @@ SELECT COUNT(?f) {bb:ChiefInformationOfficer meta:isResponsibleForFunction ?f.}
 %ASK {bb:TransinstitutionalHealthInformationSystem meta:supports bb:Telemicroscopy.}
 %\end{lstlisting}
 \vspace{-1.0em}
-\end{tcolorbox}
+\end{subsectionbox}
 \vspace{-0.5em}
 
 \end{posterbox}
