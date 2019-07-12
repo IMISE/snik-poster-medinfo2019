@@ -151,7 +151,7 @@
 \DeclareOptionX{screen}        {\@geometryKnowsThisSizetrue\imiseposter@setfinalpapersize{225mm}{180mm}}%g
 
 % Margin
-\setlength{\imiseposter@finalmargin}{1.5cm}
+\setlength{\imiseposter@finalmargin}{2.0cm}
 \DeclareOptionX{fontscale}[0.292]{\renewcommand{\imiseposter@fontscale}{#1}}
 \DeclareOptionX{margin}   [1.5cm]{\setlength{\imiseposter@finalmargin}{#1}}
 
@@ -199,7 +199,7 @@
    lmargin=\imiseposter@basemarginleft,
    rmargin=\imiseposter@basemarginright,
    ]{geometry} 
-
+\usepackage[spacing]{microtype}
 \usepackage{pgfpages}
 \if@landscape
 \if@geometryKnowsThisSize
@@ -404,7 +404,7 @@
   bgColorOne=white,
   bgColorTwo=white,
   %
-  headerheight=0.12\textheight,
+  headerheight=0.11\textheight,
   background=none,
 }{}
 \setkeys[ba]{posterbox}{
@@ -425,7 +425,7 @@
   boxColorOne=white,
   boxColorTwo=black,
   textborder=roundedleft,
-  boxpadding=0.5em,
+  boxpadding=1em,
   % header
   %headerfont=\scshape\Large,% or headerfont=\color{white}\textsf\textbf
   headerFontColor=white,
@@ -1013,14 +1013,14 @@
     %
     %
     %      % Draw Header%
-    \draw (north west) +(0em,1em+0.5\headerheight) node(image)[anchor=west]   { {\usebox{\imiseposter@titleimage@left }} };%
-    \draw (north east) +(0em,1em+0.5\headerheight) node(logo) [anchor=east]   { {\usebox{\imiseposter@titleimage@right}} };%
+    \draw (north west) +(-2.5em,0.5em+0.5\headerheight) node(image)[anchor=west]   { {\usebox{\imiseposter@titleimage@left }} };%
+    \draw (north east) +(-2.5em,0.5em+0.5\headerheight) node(logo) [anchor=east]   { {\usebox{\imiseposter@titleimage@right}} };%
     %
     \ifimiseposter@eyecatcher% Has eye catcher%
-      \draw (image.east) node(title)[anchor=west,text width=\imiseposter@titleimage@textwidth]{%
-        \begin{minipage}{\imiseposter@titleimage@textwidth}%
+      \draw (image.east) node(title)[anchor=west,text width=1.05\imiseposter@titleimage@textwidth]{%
+        \begin{minipage}{1.05\imiseposter@titleimage@textwidth}%
           \begin{center}%
-          \textbf{\textcolor{mediblue}{\Huge#3}}\\%
+          \textbf{\textcolor{mediblue}{\huge#3}}\\~\\
           {\Large \textcolor{medigray}{#4}}%
           \end{center}%
         \end{minipage}

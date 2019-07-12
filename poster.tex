@@ -55,14 +55,14 @@
 
 %%
 \begin{poster}% Set grid to false for final print
-  {grid=true,}
+  {grid=false,}
   % Eye Catcher
   {\includegraphics[height=4.5cm]{img/medfak.pdf}} 
   % Title
 %  {Linked Open Data about Management of Health Information Systems}
-  {Open and linkable Knowledge about Management of Health Information Systems}
+  {Open and Linkable Knowledge about Management of Health Information Systems}
   % Authors
-  {Konrad Höffner {\small <khoeffner@imise.uni-leipzig.de>}, Franziska Jahn, Anna Lörke, Thomas Pause, Birgit Schneider, Elske
+  {Konrad Höffner {<khoeffner@imise.uni-leipzig.de>}, Franziska Jahn, Anna Lörke, Thomas Pause, Birgit Schneider, Elske
   Ammenwerth, Alfred Winter}
   % University logo
   {% The makebox allows the title to flow into the logo, this is a hack because of the L shaped logo.
@@ -96,15 +96,18 @@
 The Semantic Network of Information Management in Hospitals (SNIK) is an OWL 2 DL ontology with a modular architecture:
 The meta model provides a common vocabulary for the domain of hospital information system (HIS) management.
 % and thus defines, which superclasses and relations can be used., see \cref{fig:metamodel}.
-It defines three basic disjunctive classes: Role (who), Function (does what) and Entity Type (which information is read and written). %, see \cref{fig:metamodel}.
+It defines three basic disjunctive classes: Role (who), Function (does what) and Entity Type (which information is read and written).\\
+~\\
 \includegraphics[width=1.01\columnwidth]{img/metamodel9s.pdf}
-\vspace{0.3em}
+\vspace{-2em}
 \end{posterbox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{posterbox}[name=methods,below=background]{Methods}
 Semantic Web technologies principles are used to create, store and publish SNIK as Linked Open Data~\cite{sniktec}.
-Subontologies are manually extracted from different sources and build upon the meta model by attaching their subclass hierarchies to the Function, Role and EntityType classes.
+Subontologies are manually extracted from different sources and build upon the meta model by attaching their subclass hierarchies to the Function, Role and EntityType classes.\\
+~\\
 {\centering\includegraphics[width=0.8\columnwidth]{img/hierarchy.pdf}}
+\vspace{0.3em}
 \begin{center}
 \begin{tabular*}{0.96\columnwidth}{lll}
 \toprule
@@ -119,7 +122,6 @@ Subontologies are manually extracted from different sources and build upon the m
 \bottomrule
 \end{tabular*}
 \end{center}
-
 %inked Data principles, each class of SNIK has a unique URL.
 %resource using the HTTP protocol to receive a description of
 %the class, respectively the concept being represented by the
@@ -129,7 +131,7 @@ Subontologies are manually extracted from different sources and build upon the m
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{posterbox}[name=results,column=1]{Results}
 SNIK v0.8 contains \num{4729} classes, \num{329} properties, \num{713} interlinks and \num{112747} triples.
-To achieve our aim of making SNIK availble as Linked Open Data over several different interfaces, we publish SNIK under the CC BY-NC-SA 4.0 as:
+To achieve our aim of making SNIK available as Linked Open Data over several different interfaces, we publish SNIK under the CC BY-NC-SA 4.0 as:
 \iffalse
 \begin{tabulary}{\columnwidth}{lL}
 \toprule
@@ -248,15 +250,15 @@ Modelling	&Experts, Ontologists		&SPARQL Endpoint, RDF Dump\\
     SNIK is supported under the DFG grant numbers 1605/7-1 and 1387/8-1.
   \end{posterbox}
 %%%%%%%%%%%%%%% IMISE Logo
- \node [anchor=south east, inner sep=1pt,xshift=-19em] at (current page.south east)
+ \node [anchor=south east, inner sep=1pt,xshift=-21em,yshift=1.1em] at (current page.south east)
  {\includegraphics[height=0.03\textheight]{img/imise-logo.pdf}
  };
 %%%%%%%%%%%%%%% SNIK Logo 
- \node [anchor=south east, inner sep=1pt,xshift=-35em] at (current page.south east) % for unknown reasons the xshift is necessary
+ \node [anchor=south east, inner sep=1pt,xshift=-37em,yshift=1.1em] at (current page.south east) % for unknown reasons the xshift is necessary
  {\includegraphics[height=0.03\textheight]{img/snik-logo.png}
  };
 %%%%%%%%%%%%%%% DFG Logo
- \node [anchor=south east, inner sep=1pt,xshift=-2.5em] at (current page.south east) % for unknown reasons the xshift is necessary
+ \node [anchor=south east, inner sep=1pt,xshift=-4.5em,yshift=1.1em] at (current page.south east) % for unknown reasons the xshift is necessary
  {\includegraphics[height=0.03\textheight]{img/dfg-logo.pdf}
  };
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
